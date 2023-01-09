@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:taskwarrior/config/app_settings.dart';
 import 'package:taskwarrior/model/storage/storage_widget.dart';
 import 'package:taskwarrior/routes/pageroute.dart';
@@ -81,11 +82,15 @@ class _NavDrawerState extends State<NavDrawer> {
                       size: 25,
                     ),
               title: const Text("Switch Theme"),
-              onTap: () {
+              onTap: () async {
                 if (AppSettings.isDarkMode) {
                   AppSettings.isDarkMode = false;
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('isDarkMode', false);
                 } else {
                   AppSettings.isDarkMode = true;
+                  final prefs = await SharedPreferences.getInstance();
+                  prefs.setBool('isDarkMode', true);
                 }
                 setState(() {});
                 widget.notifyParent();

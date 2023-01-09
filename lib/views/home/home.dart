@@ -37,6 +37,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    AppSettings.getDark();
     var storageWidget = StorageWidget.of(context);
     var taskData = storageWidget.tasks;
 
